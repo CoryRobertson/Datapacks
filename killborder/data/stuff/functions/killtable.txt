@@ -1,0 +1,31 @@
+blaze
+cave spider
+creeper
+drowned
+elder guardian
+enderman
+endermite
+evoker
+ghast
+guardian
+hoglin
+husk
+magma cube
+phantom
+piglin
+piglin brute
+pillager
+ravager
+shulker
+silverfish
+skeleton
+spider
+stray
+vex
+vindicator
+witch
+wither
+zoglin
+zombie
+zombie villager
+zombie piglin

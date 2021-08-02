@@ -8,6 +8,8 @@
 - Soft Hardcore
   - Changes hardcore mode into a more forgiving yet uneasy way to play, you get 3 lives and after that you are set to spectator.
   - You can get your deaths reset as a spectator by having another player, or a dispenser drop a diamond block on the ground, then run into it while still in spectator view. This will delete the diamond block in the process and reset your lives to 3.
+- Kill Border
+  - Changes the world to have a world border that expands based on mob kills.
   
 #### Suggestions
 I am completely open to suggestions as making datapacks is quite fun, feel free to ask. I'm pretty new though so I might not do everything great or even proper.
