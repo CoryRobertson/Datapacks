@@ -1,0 +1,7 @@
+
+#file: ./main
+timer += 1
+if(timer > 19){
+  /execute as @a at @s if block ~ ~-1 ~ minecraft:grass_block run effect give @s minecraft:speed 1 1
+  timer = 0
+}
