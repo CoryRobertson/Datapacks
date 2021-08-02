@@ -10,6 +10,7 @@
   - You can get your deaths reset as a spectator by having another player, or a dispenser drop a diamond block on the ground, then run into it while still in spectator view. This will delete the diamond block in the process and reset your lives to 3.
 - Kill Border
   - Changes the world to have a world border that expands based on mob kills.
+  - The amount of kills needed goes up each time it expands.
   
 #### Suggestions
 I am completely open to suggestions as making datapacks is quite fun, feel free to ask. I'm pretty new though so I might not do everything great or even proper.
