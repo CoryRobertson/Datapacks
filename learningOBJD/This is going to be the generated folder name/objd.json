@@ -1,0 +1,1 @@
+{"name":"This is going to be the generated folder name","path":"./","pack_format":6,"packs":[{"name":"mypack","files":{"main.mcfunction":"setblock 0 0 0 obsidian\n"},"main":"main.mcfunction","load":"null"}],"description":"This is a datapack generated with objd by Stevertus"}
