@@ -75,7 +75,7 @@ public class Generator
             case 3:
                 return "minecraft:caves";
             case 4:
-                return "minecraft:end";
+                return "minecraft:the_end";//the minecraft wiki as of 8/9/21 has a type of this keyword on https://minecraft.fandom.com/wiki/Custom_world_generation#Noise_settings, I made an edit to the page
             case 5:
                 return "minecraft:floating_islands";
             default:
