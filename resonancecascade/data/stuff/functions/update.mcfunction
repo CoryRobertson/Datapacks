@@ -1,0 +1,1 @@
+execute as @a[scores={rc_deaths=1..}] run function stuff:justdied
