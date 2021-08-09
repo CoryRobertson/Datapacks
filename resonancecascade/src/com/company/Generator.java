@@ -38,13 +38,13 @@ public class Generator
         int dimSeed = getSeed();
         //String setting = getSettings();
         //add settings to the generator object
-        gen.put("settings", getSettings());
+        gen.put("settings", getGenSettings());
         gen.put("seed", dimSeed); // sets the seed to the dimension
         gen.put("type", "minecraft:noise");// I dont know of any more interesting noise functions
 
         //add settings to the biome object
         biome.put("seed", dimSeed);
-        biome.put("type", getSettings());
+        biome.put("type", getBiomeSettings());
 
         // put the biome source object into the generator object
         gen.put("biome_source", biome);
@@ -60,26 +60,48 @@ public class Generator
         return rand.nextInt(minecraftSeedMax) + minecraftSeedMin;
     }
 
-    private String getSettings()
+    //TODO: unfinished function
+    private String getGenSettings()
     {
-        int choice = rand.nextInt(6);
+        /*
+        minecraft:the_end
+        minecraft:nether
+        minecraft:floating_islands
+        minecraft:amplified
+        minecraft:caves
+        minecraft:overworld
+         */
+        int choice = rand.nextInt(5);
         switch (choice)
         {
             //kept redundancy for readability
             case 0:
-                return "minecraft:overworld";
+                return "minecraft:overworld";//the minecraft wiki as of 8/9/21 has a typo of this keyword on https://minecraft.fandom.com/wiki/Custom_world_generation#Noise_settings, I made an edit to the page
             case 1:
-                return "minecraft:amplified";
+                return "minecraft:the_end";
             case 2:
                 return "minecraft:nether";
             case 3:
-                return "minecraft:caves";
+                return "minecraft:amplified";
             case 4:
-                return "minecraft:the_end";//the minecraft wiki as of 8/9/21 has a type of this keyword on https://minecraft.fandom.com/wiki/Custom_world_generation#Noise_settings, I made an edit to the page
-            case 5:
-                return "minecraft:floating_islands";
+                return "minecraft:caves";
             default:
-                return "minecraft:overworld";
+                return "overworld";
+        }
+    }
+
+    private String getBiomeSettings()
+    {
+        int choice = rand.nextInt(2);
+        switch (choice)
+        {
+            //kept redundancy for readability
+            case 0:
+                return "minecraft:the_end";//the minecraft wiki as of 8/9/21 has a type of this keyword on https://minecraft.fandom.com/wiki/Custom_world_generation#Noise_settings, I made an edit to the page
+            case 1:
+                return "minecraft:vanilla_layered";
+            default:
+                return "minecraft:vanilla_layered";
         }
     }
 

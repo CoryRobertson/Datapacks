@@ -13,3 +13,4 @@ resonancecascade/.idea/vcs.xml
 resonancecascade/resonancecascade.iml
 *.class
 resonancecascade/.idea/artifacts/resonancecascade_jar.xml
+resonancecascade/lib/json-simple-1.1.1.jar

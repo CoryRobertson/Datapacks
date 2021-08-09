@@ -2,6 +2,7 @@ package com.company;
 //import java.util.Scanner;
 
 
+import java.io.File;
 import java.util.Random;
 
 /**
@@ -29,6 +30,16 @@ public class Main {
         FileOutput.writeFileContents("./data/stuff/dimension_type/1.json",gen.getDimensionTypeJSON());
         FileOutput.writeFileContents("./data/stuff/dimension/1.json",gen.getDimensionJSON());
 
+        for (int i = 0; i < 10; i++)
+        {
+            Generator temp = new Generator(i,i + "");
+
+            System.out.println(temp.getDimensionJSON());
+            System.out.println(temp.getDimensionTypeJSON());
+            FileOutput.writeFileContents("./data/stuff/dimension_type/" + i + ".json",temp.getDimensionTypeJSON());
+            FileOutput.writeFileContents("./data/stuff/dimension/" + i + ".json",temp.getDimensionJSON());
+
+        }
     }
 
 
