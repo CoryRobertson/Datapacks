@@ -9,8 +9,8 @@ import java.util.Random;
 public class Generator
 {
     //default instance variables to generate the data
-    private int minecraftSeedMin;
-    private int minecraftSeedMax;
+    private int minecraftSeedMin = 0;
+    private int minecraftSeedMax = 999999999;
     private String dimName;
     private String infiniburnBlock = "minecraft:infiniburn_overworld";
     Random rand;
@@ -19,8 +19,6 @@ public class Generator
     {
         rand = new Random(genSeed);
         this.dimName = dimName;
-        minecraftSeedMin = 0;
-        minecraftSeedMax = 999999999;
 
     }
 
@@ -72,6 +70,7 @@ public class Generator
         minecraft:overworld
          */
         int choice = rand.nextInt(5);
+        //TODO: change out this switch statement for an array that selects an element from it, this would allow the change of the elements without changing much code
         switch (choice)
         {
             //kept redundancy for readability
@@ -93,6 +92,7 @@ public class Generator
     private String getBiomeSettings()
     {
         int choice = rand.nextInt(2);
+        //TODO: change out this switch statement for an array that selects an element from it, this would allow the change of the elements without changing much code
         switch (choice)
         {
             //kept redundancy for readability
@@ -187,6 +187,8 @@ public class Generator
         switch(choice)
         {
             //default switch repeated for readability
+            //TODO: change out this switch statement for an array that selects an element from it, this would allow the change of the elements without changing much code
+
             case 0:
                 return "";
             case 1:
@@ -202,6 +204,7 @@ public class Generator
 
     private String getInfiniburn()
     {
+        //TODO: add an array that gets its elements chosen to allow for ease of adding possible elements to this output
         return infiniburnBlock;
     }
 
@@ -211,6 +214,7 @@ public class Generator
      */
     private int getMinY()
     {
+        //TODO: add a range that this can be generated randomly in more interesting ways
         return 0;
     }
 
@@ -220,6 +224,7 @@ public class Generator
      */
     private int getLogicalHeight()
     {
+        //TODO: add a range that this can be generated randomly in more interesting ways
         return 256;
     }
 
@@ -229,6 +234,7 @@ public class Generator
      */
     private int getHeight()
     {
+        //TODO: add a range that this can be generated randomly in more interesting ways
         return 256;
     }
 }

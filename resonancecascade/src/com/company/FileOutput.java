@@ -26,7 +26,7 @@ public class FileOutput
         }
         catch (IOException e)
         {
-            System.out.println("ERROR failed to write to file, possible insufficient perms?");
+            System.out.println("ERROR failed to write to file, possible insufficient perms, or missing file structure?");
         }
     }
 }
