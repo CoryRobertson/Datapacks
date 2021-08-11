@@ -15,6 +15,11 @@ public class Generator
     private String infiniburnBlock = "minecraft:infiniburn_overworld";
     Random rand;
 
+    /**
+     *
+     * @param genSeed the seed used to generate a dimension
+     * @param dimName the name of the dimension (which will be the filename as well)
+     */
     public Generator(int genSeed, String dimName)
     {
         rand = new Random(genSeed);
@@ -23,7 +28,7 @@ public class Generator
     }
 
     /**
-     * This function returns the json file for the dimension in the form of a string after generating all of the necessary data for it
+     * This function returns the json file for the dimension in the form of a string after generating all the necessary data for it
      * @return the json dimension in string format
      */
     public String getDimensionJSON()
@@ -38,7 +43,7 @@ public class Generator
         //add settings to the generator object
         gen.put("settings", getGenSettings());
         gen.put("seed", dimSeed); // sets the seed to the dimension
-        gen.put("type", "minecraft:noise");// I dont know of any more interesting noise functions
+        gen.put("type", "minecraft:noise");// I don't know of any more interesting noise functions
 
         //add settings to the biome object
         biome.put("seed", dimSeed);
@@ -58,7 +63,6 @@ public class Generator
         return rand.nextInt(minecraftSeedMax) + minecraftSeedMin;
     }
 
-    //TODO: unfinished function
     private String getGenSettings()
     {
         /*
@@ -106,7 +110,7 @@ public class Generator
     }
 
     /**
-     * This function returns the json file for the dimension type in the form of a string after generating all of the necessary data for it
+     * This function returns the json file for the dimension type in the form of a string after generating all the necessary data for it
      * @return the json dimension type in string format
      */
     public String getDimensionTypeJSON()
@@ -127,7 +131,7 @@ public class Generator
         dimType.put("infiniburn", getInfiniburn());
         dimType.put("min_y", getMinY());
         dimType.put("height", getHeight());
-        //Wont implement FixedTime because I havent decided wheather to allow that to be a generator setting or randomly generated
+        //Won't implement FixedTime because I haven't decided whether to allow that to be a generator setting or randomly generated
         return dimType.toJSONString();
     }
 
@@ -219,7 +223,7 @@ public class Generator
     }
 
     /**
-     * The maximum height logical things will treat as the maximum for the dimension e.g. nether portals wont generate above here
+     * The maximum height logical things will treat as the maximum for the dimension e.g. nether portals won't generate above here
      * @return logicalHeight
      */
     private int getLogicalHeight()
@@ -237,4 +241,26 @@ public class Generator
         //TODO: add a range that this can be generated randomly in more interesting ways
         return 256;
     }
+
+    /**
+     * Returns the dimension name for name keeping purposes
+     * @return the dimension name
+     */
+    public String getDimName()
+    {
+        return dimName;
+    }
+
+    /**
+     * Chooses a random string from an array of strings to return
+     * @param args, an array of strings
+     * @return Single string chosen from input array
+     */
+    private String chooseRandomString(String[] args)
+    {
+        int n = rand.nextInt(args.length); // generate a random number between 0 and the length of the array
+
+        return args[n];
+    }
+
 }

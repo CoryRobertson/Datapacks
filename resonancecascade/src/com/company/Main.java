@@ -16,37 +16,54 @@ public class Main {
      * Seed int, for rng generation
      * Generator type int, for deciding preset generation
      * @param args
+     * Expected args are <seed> <generation setting>
      */
     public static void main(String[] args)
     {
-//        Generator gen = new Generator(1,"1");
-        //Generator gen1 = new Generator(2,"2");
 
-//        System.out.println(gen.getDimensionJSON());
-//        System.out.println(gen.getDimensionTypeJSON());
+        int numDims = 2;
+        int seed = 0;
+        Generator[] dimenions = new Generator[numDims];
 
-        //FileOutput fO = new FileOutput();
-        //FileOutput.writeFileContents("./dir.json","1");
-//        FileOutput.writeFileContents("./data/stuff/dimension_type/1.json",gen.getDimensionTypeJSON());
-//        FileOutput.writeFileContents("./data/stuff/dimension/1.json",gen.getDimensionJSON());
-
-        //TODO: implement the use of a help statement as well as a way to check if the user inputs a valid command line arguement e.g. expect a seed, if none specified, tell the user to input one as well as a generator type.
-
-
-
-
-        //TODO: implement use of args via command line to seed these dimensions e.g. dim 0 = seed, dim 1 = seed+i
-        for (int i = 0; i < 10; i++)
+        try
         {
-            Generator temp = new Generator(i,i + "");
+            //examples of help commands are "h", "-h", "help", "-help" but im just gonna use contains "h" cause that will probably work just great lmao
+            if (args[0].contains("h"))
+            {
+                printHelp();
+            }
+            else if (Integer.parseInt(args[0]) >= 0 )
+            {
+                seed = Integer.parseInt(args[0]);
 
-            System.out.println(temp.getDimensionJSON());
-            System.out.println(temp.getDimensionTypeJSON());
-            FileOutput.writeFileContents("./data/stuff/dimension_type/" + i + ".json",temp.getDimensionTypeJSON());
-            FileOutput.writeFileContents("./data/stuff/dimension/" + i + ".json",temp.getDimensionJSON());
+                for (int i = 0; i < numDims; i++)
+                {
+                    Generator temp = new Generator(seed+i, i + "");
+                    //storing the dimensions in an array just in case they are needed
+                    dimenions[i] = temp;
+                    System.out.println(temp.getDimensionJSON());
+                    System.out.println(temp.getDimensionTypeJSON());
 
+                    FileOutput.writeFileContents("./data/stuff/dimension_type/" + temp.getDimName() + ".json", temp.getDimensionTypeJSON());
+                    FileOutput.writeFileContents("./data/stuff/dimension/" + temp.getDimName() + ".json", temp.getDimensionJSON());
+
+                }
+            }
+            else
+            {
+                printHelp();
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            printHelp();
         }
     }
 
+    private static void printHelp()
+    {
+        System.out.println("Usage: java -jar resonancecascade.jar <seed> <generation setting>");
+        System.out.println("<seed> is a 9 or less digit number greater than 0 and <generation setting> is 0 (for now)");
+    }
 
 }
