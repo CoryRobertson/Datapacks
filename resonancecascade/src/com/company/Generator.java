@@ -12,7 +12,14 @@ public class Generator
     private int minecraftSeedMin = 0;
     private int minecraftSeedMax = 999999999;
     private String dimName;
-    private String infiniburnBlock = "minecraft:infiniburn_overworld";
+
+
+    private String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
+    private String[] effects = {"minecraft:overworld","minecraft:the_nether","minecraft:the_end"};
+    private String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:vanilla_layered"};
+    private String[] genSettings = {"minecraft:overworld","minecraft:the_end","minecraft:nether","minecraft:amplified","minecraft:caves"};
+
+
     Random rand;
 
     /**
@@ -24,7 +31,7 @@ public class Generator
     {
         rand = new Random(genSeed);
         this.dimName = dimName;
-
+        //infiniburnBlocks[0] = "minecraft:infiniburn_overworld";
     }
 
     /**
@@ -63,6 +70,10 @@ public class Generator
         return rand.nextInt(minecraftSeedMax) + minecraftSeedMin;
     }
 
+    /**
+     *
+     * @return a generator setting chosen at random from genSettings[]
+     */
     private String getGenSettings()
     {
         /*
@@ -73,40 +84,20 @@ public class Generator
         minecraft:caves
         minecraft:overworld
          */
-        int choice = rand.nextInt(5);
-        //TODO: change out this switch statement for an array that selects an element from it, this would allow the change of the elements without changing much code
-        switch (choice)
-        {
-            //kept redundancy for readability
-            case 0:
-                return "minecraft:overworld";//the minecraft wiki as of 8/9/21 has a typo of this keyword on https://minecraft.fandom.com/wiki/Custom_world_generation#Noise_settings, I made an edit to the page
-            case 1:
-                return "minecraft:the_end";
-            case 2:
-                return "minecraft:nether";
-            case 3:
-                return "minecraft:amplified";
-            case 4:
-                return "minecraft:caves";
-            default:
-                return "overworld";
-        }
+        String retn = chooseRandomString(genSettings);
+
+        return retn;
     }
 
+    /**
+     *
+     * @return a biome setting chosen at random from biomeSettings[]
+     */
     private String getBiomeSettings()
     {
-        int choice = rand.nextInt(2);
-        //TODO: change out this switch statement for an array that selects an element from it, this would allow the change of the elements without changing much code
-        switch (choice)
-        {
-            //kept redundancy for readability
-            case 0:
-                return "minecraft:the_end";//the minecraft wiki as of 8/9/21 has a type of this keyword on https://minecraft.fandom.com/wiki/Custom_world_generation#Noise_settings, I made an edit to the page
-            case 1:
-                return "minecraft:vanilla_layered";
-            default:
-                return "minecraft:vanilla_layered";
-        }
+        String retn = chooseRandomString(biomeSettings);
+
+        return retn;
     }
 
     /**
@@ -175,41 +166,44 @@ public class Generator
         return rand.nextBoolean();
     }
 
+    /**
+     *
+     * @return a coordinate scale randing from 0.5d to 8.5d
+     */
     private double getCoordinateScale()
     {
         return rand.nextDouble()*8 + 0.5;
     }
 
+    /**
+     *
+     * @return a light value ranging from 0.0d to 1.0d
+     */
     private double getAmbientLight()
     {
         return rand.nextDouble() * 1;
     }
 
+    /**
+     *
+     * @return an effect chosen randomly from effects[]
+     */
     private String getEffects()
     {
-        int choice = rand.nextInt(4);
-        switch(choice)
-        {
-            //default switch repeated for readability
-            //TODO: change out this switch statement for an array that selects an element from it, this would allow the change of the elements without changing much code
+        String retn = chooseRandomString(effects);
 
-            case 0:
-                return "";
-            case 1:
-                return "minecraft:overworld";
-            case 2:
-                return "minecraft:the_nether";
-            case 3:
-                return "minecraft:the_end";
-            default:
-                return "";
-        }
+        return retn;
     }
 
+    /**
+     *
+     * @return a block chosen randomly from infiniburnBlocks[]
+     */
     private String getInfiniburn()
     {
-        //TODO: add an array that gets its elements chosen to allow for ease of adding possible elements to this output
-        return infiniburnBlock;
+        String retn = chooseRandomString(infiniburnBlocks);
+
+        return retn;
     }
 
     /**

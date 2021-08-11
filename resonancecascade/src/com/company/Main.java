@@ -2,8 +2,8 @@ package com.company;
 //import java.util.Scanner;
 
 
-import java.io.File;
-import java.util.Random;
+//import java.io.File;
+//import java.util.Random;
 
 /**
  * This class is used to take the user input and translate that to getting the program to run in the most full amount possible.
