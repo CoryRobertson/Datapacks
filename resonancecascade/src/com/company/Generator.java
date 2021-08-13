@@ -12,6 +12,9 @@ public class Generator
     private int minecraftSeedMin = 0;
     private int minecraftSeedMax = 999999999;
     private String dimName;
+    private int minTimeStay = 100;
+    private int maxTimeStay = 6000;
+    private int timeToStay = 20;
 
 
     private String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
@@ -20,7 +23,7 @@ public class Generator
     private String[] genSettings = {"minecraft:overworld","minecraft:the_end","minecraft:nether","minecraft:amplified","minecraft:caves"};
 
 
-    Random rand;
+    private Random rand;
 
     /**
      *
@@ -62,6 +65,7 @@ public class Generator
         //put the generator which now has the biome source, and all of its settings, into the dimension object
         dimension.put("generator", gen);
         dimension.put("type","stuff:" + dimName);
+        timeToStay = genTimeStay();
         return dimension.toJSONString();
     }
 
@@ -255,6 +259,24 @@ public class Generator
         int n = rand.nextInt(args.length); // generate a random number between 0 and the length of the array
 
         return args[n];
+    }
+
+    /**
+     * Used to determine how long the player will remain inside this dimension
+     * @return a random number between min time stay and maxTimeStay+minTimeStay
+     */
+    private int genTimeStay()
+    {
+        return rand.nextInt(maxTimeStay)+minTimeStay;
+    }
+
+    /**
+     * generic getter for time to stay in the dimension
+     * @return a number generated at the time of getDimensionJSON() called
+     */
+    public int getTimeStay()
+    {
+        return timeToStay;
     }
 
 }
