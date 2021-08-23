@@ -15,12 +15,15 @@ public class Generator
     private int minTimeStay = 100;
     private int maxTimeStay = 6000;
     private int timeToStay = 20;
+    private int height = 256;
 
 
     private String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
     private String[] effects = {"minecraft:overworld","minecraft:the_nether","minecraft:the_end"};
     private String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:vanilla_layered"};
-    private String[] genSettings = {"minecraft:overworld","minecraft:the_end","minecraft:nether","minecraft:amplified","minecraft:caves"};
+    //private String[] genSettings = {"minecraft:overworld","minecraft:the_end","minecraft:nether","minecraft:amplified","minecraft:caves"};
+    private String[] genSettings = {"minecraft:overworld","minecraft:nether","minecraft:amplified","minecraft:caves"}; // turns out minecraft:the_end is just too difficult to get working here
+    //TODO: further understand how minecraft:the_end causes issues when used as a generator setting
 
 
     private Random rand;
@@ -51,13 +54,14 @@ public class Generator
         int dimSeed = getSeed();
         //String setting = getSettings();
         //add settings to the generator object
-        gen.put("settings", getGenSettings());
+        String genSettings = getGenSettings();
+        gen.put("settings", genSettings);//this is depended on upon by getBiomeSettings();
         gen.put("seed", dimSeed); // sets the seed to the dimension
         gen.put("type", "minecraft:noise");// I don't know of any more interesting noise functions
 
         //add settings to the biome object
         biome.put("seed", dimSeed);
-        biome.put("type", getBiomeSettings());
+        biome.put("type", getBiomeSettings(genSettings)); // this needs to be dependent on the genSettings();
 
         // put the biome source object into the generator object
         gen.put("biome_source", biome);
@@ -97,11 +101,17 @@ public class Generator
      *
      * @return a biome setting chosen at random from biomeSettings[]
      */
-    private String getBiomeSettings()
+    private String getBiomeSettings(String genSettings)
     {
-        String retn = chooseRandomString(biomeSettings);
+        //TODO: clean this up
+        if (genSettings.equals("minecraft:the_end")) // really hacky solution?? all hope is not lost yet!
+            return "minecraft:fixed";
+        else
+        {
+            String retn = chooseRandomString(biomeSettings);
 
-        return retn;
+            return retn;
+        }
     }
 
     /**
@@ -121,11 +131,12 @@ public class Generator
         dimType.put("has_ceiling", getHasCeiling());
         dimType.put("coordinate_scale", getCoordinateScale());
         dimType.put("ambient_light", getAmbientLight());
-        dimType.put("logical_height", getLogicalHeight());
         dimType.put("effects", getEffects());
         dimType.put("infiniburn", getInfiniburn());
         dimType.put("min_y", getMinY());
-        dimType.put("height", getHeight());
+        height = getHeight();
+        dimType.put("height", height);
+        dimType.put("logical_height", getLogicalHeight());
         //Won't implement FixedTime because I haven't decided whether to allow that to be a generator setting or randomly generated
         return dimType.toJSONString();
     }
@@ -216,8 +227,8 @@ public class Generator
      */
     private int getMinY()
     {
-        //TODO: add a range that this can be generated randomly in more interesting ways
         return 0;
+        //return rand.nextInt(10); //TODO: tentative
     }
 
     /**
@@ -226,18 +237,17 @@ public class Generator
      */
     private int getLogicalHeight()
     {
-        //TODO: add a range that this can be generated randomly in more interesting ways
-        return 256;
+        return height;
     }
 
     /**
-     * The maximum height that blocks can exist
+     * The maximum height that blocks can exist (16-256)
      * @return height
      */
     private int getHeight()
     {
-        //TODO: add a range that this can be generated randomly in more interesting ways
-        return 256;
+        //128 - 256
+        return (rand.nextInt(8) + 8)* 16;
     }
 
     /**
