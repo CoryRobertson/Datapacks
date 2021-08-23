@@ -45,8 +45,8 @@ public class Main {
 
                     //storing the dimensions in an array just in case they are needed
                     dimenions[i] = temp;
-                    System.out.println(temp.getDimensionJSON());
-                    System.out.println(temp.getDimensionTypeJSON());
+                    //System.out.println(temp.getDimensionJSON());
+                    //System.out.println(temp.getDimensionTypeJSON());
 
                     FileOutput.writeFileContents("./data/stuff/dimension_type/" + temp.getDimName() + ".json", temp.getDimensionTypeJSON());
                     FileOutput.writeFileContents("./data/stuff/dimension/" + temp.getDimName() + ".json", temp.getDimensionJSON());

@@ -11,18 +11,18 @@ public class FileOutput
 {
     /**
      * writes nessecary data to a file given a filename
-     * @param filename the name of the file that will be written
+     * @param filename the name of the file that will be written and the path where the file goes e.g. "./data/stuff/dimension/0.json"
      * @param data the data in the file
      */
     public static void writeFileContents(String filename, String data)
     {
-        filename = "./" + filename;
+        //filename = "./" + filename;
         File file = new File(filename);
         //double time = System.currentTimeMillis();
         try (FileWriter fw = new FileWriter(file))
         {
             fw.write(data);
-            System.out.println("Wrote data to file successfully.");
+            System.out.println("Wrote data to file successfully. (" + filename + ")");
             fw.close();
         }
         catch (IOException e)

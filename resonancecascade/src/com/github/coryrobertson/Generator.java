@@ -12,16 +12,16 @@ public class Generator
     private int minecraftSeedMin = 0;
     private int minecraftSeedMax = 999999999;
     private String dimName;
-    private int minTimeStay = 100;
-    private int maxTimeStay = 6000;
-    private int timeToStay = 20;
+    private int minTimeStay = 100; //going unused soon probably
+    private int maxTimeStay = 6000; //going unused soon probably
+    private int timeToStay = 20; //going unused soon probably
     private int height = 256;
 
-    private String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
-    private String[] effects = {"minecraft:overworld","minecraft:the_nether","minecraft:the_end"};
-    private String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:vanilla_layered"};
+    protected String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
+    protected String[] effects = {"minecraft:overworld","minecraft:the_nether","minecraft:the_end"};
+    protected String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:vanilla_layered"};
     //private String[] genSettings = {"minecraft:overworld","minecraft:the_end","minecraft:nether","minecraft:amplified","minecraft:caves"};
-    private String[] genSettings = {"minecraft:overworld","minecraft:nether","minecraft:amplified","minecraft:caves"}; // turns out minecraft:the_end is just too difficult to get working here
+    protected String[] genSettings = {"minecraft:overworld","minecraft:nether","minecraft:amplified","minecraft:caves"}; // turns out minecraft:the_end is just too difficult to get working here
     //TODO: further understand how minecraft:the_end causes issues when used as a generator setting
 
     private Random rand;
