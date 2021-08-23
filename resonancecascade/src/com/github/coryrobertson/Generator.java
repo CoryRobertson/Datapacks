@@ -1,4 +1,4 @@
-package com.company;
+package com.github.coryrobertson;
 import org.json.simple.*;
 
 import java.util.Random;
@@ -17,14 +17,12 @@ public class Generator
     private int timeToStay = 20;
     private int height = 256;
 
-
     private String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
     private String[] effects = {"minecraft:overworld","minecraft:the_nether","minecraft:the_end"};
     private String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:vanilla_layered"};
     //private String[] genSettings = {"minecraft:overworld","minecraft:the_end","minecraft:nether","minecraft:amplified","minecraft:caves"};
     private String[] genSettings = {"minecraft:overworld","minecraft:nether","minecraft:amplified","minecraft:caves"}; // turns out minecraft:the_end is just too difficult to get working here
     //TODO: further understand how minecraft:the_end causes issues when used as a generator setting
-
 
     private Random rand;
 

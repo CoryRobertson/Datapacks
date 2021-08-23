@@ -1,4 +1,4 @@
-package com.company;
+package com.github.coryrobertson;
 
 import java.io.File;
 import java.io.FileWriter;

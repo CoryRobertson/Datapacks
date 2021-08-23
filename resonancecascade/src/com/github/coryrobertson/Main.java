@@ -1,10 +1,8 @@
-package com.company;
+package com.github.coryrobertson;
+
 //import java.util.Scanner;
-
-
 //import java.io.File;
 //import java.util.Random;
-
 //import org.json.simple.parser.JSONParser;
 
 /**
