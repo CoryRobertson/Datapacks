@@ -12,15 +12,14 @@ public class Generator
     private int minecraftSeedMin = 0;
     private int minecraftSeedMax = 999999999;
     private String dimName;
-    private int minTimeStay = 100; //going unused soon probably
-    private int maxTimeStay = 6000; //going unused soon probably
-    private int timeToStay = 20; //going unused soon probably
+    private int minTimeStay = 1;
+    private int maxTimeStay = 34;
+    private int timeToStay = 1;
     private int height = 256;
 
     protected String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
     protected String[] effects = {"minecraft:overworld","minecraft:the_nether","minecraft:the_end"};
     protected String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:vanilla_layered"};
-    //private String[] genSettings = {"minecraft:overworld","minecraft:the_end","minecraft:nether","minecraft:amplified","minecraft:caves"};
     protected String[] genSettings = {"minecraft:overworld","minecraft:nether","minecraft:amplified","minecraft:caves"}; // turns out minecraft:the_end is just too difficult to get working here
     //TODO: further understand how minecraft:the_end causes issues when used as a generator setting
 
@@ -275,7 +274,10 @@ public class Generator
      */
     private int genTimeStay()
     {
-        return rand.nextInt(maxTimeStay)+minTimeStay;
+
+        int output = rand.nextInt(maxTimeStay)+minTimeStay;
+        //System.out.println("timeStay = " + output);
+        return output;
     }
 
     /**

@@ -16,61 +16,59 @@ public class Main {
      * Seed int, for rng generation
      * Generator type int, for deciding preset generation
      * @param args
-     * Expected args are <seed> <generation setting>
+     * Expected args are <seed> <generation setting> <how many dimensions>
+     *
      */
     public static void main(String[] args)
     {
-
-        int numDims = 10;
-        int seed = 0;
-        Generator[] dimenions = new Generator[numDims];
-        //String[] s = new String[]{"a","b","c"};
-        //FileOutput.writeArrayToFile("test",s,false);
-        String[] teleportCommands = new String[numDims];
-
         try
         {
+
             //examples of help commands are "h", "-h", "help", "-help" but im just gonna use contains "h" cause that will probably work just great lmao
             if (args[0].contains("h"))
             {
                 printHelp();
             }
-            else if (Integer.parseInt(args[0]) >= 0 )
+            else
             {
-                seed = Integer.parseInt(args[0]);
+
+                int numDims = Integer.parseInt(args[2]); // this is the variable used to store how many dimensions to generate
+                int seed = Integer.parseInt(args[0]); // this is the seed in which we use to generate our dimensions
+                Generator[] dimenions = new Generator[numDims]; // this is an array of dimensions that gets populated after the comming for loop
+                String[] teleportCommands = new String[numDims]; // this is an array of minecraft commands tied to the size of dimensions, we use this to teleport the player around
+
+                int runningCount = 0; // this is a variable used to store how many ticks to add onto each teleport command
 
                 for (int i = 0; i < numDims; i++)
                 {
-                    Generator temp = new Generator(seed+i, i + "");
-
                     //storing the dimensions in an array just in case they are needed
+                    Generator temp = new Generator(seed+i*seed, i + "");
                     dimenions[i] = temp;
-                    //System.out.println(temp.getDimensionJSON());
-                    //System.out.println(temp.getDimensionTypeJSON());
 
+                    //write the dimension out to a file where it goes
                     FileOutput.writeFileContents("./data/stuff/dimension_type/" + temp.getDimName() + ".json", temp.getDimensionTypeJSON());
                     FileOutput.writeFileContents("./data/stuff/dimension/" + temp.getDimName() + ".json", temp.getDimensionJSON());
 
-                    //teleportCommands[i] = "execute as @a";
+                    //increment the time to stay running count
+                    runningCount += temp.getTimeStay();
 
-                    /*
-                    Ticks to spend in dimension is the number that each dimension generates itself
-                    RunningCount is the amount of ticks of all other previous dimensions spent, this allows us to just use a total amount of ticks in a minecraft world
-                    Next dimension is the one next one in the list, so it would start with the vanilla overworld where the player is, and then after that dim0, then dim1, etc
-                    This would look something like adding each dimensions own teleport function toa list itself.
-                     */
+                    //add the current dimensions teleport command to the array to be written to a file
+                    teleportCommands[i] = "execute as @a[scores={dimensionCount=" + i + ",timerEnd=" + runningCount + "..}] in stuff:" + i + " run function stuff:resonate";
+
+
                 }
+                //write the array out to a file
+                FileOutput.writeArrayToFile("./data/stuff/functions/dimtele.mcfunction",teleportCommands,true);
+
             }
-            else
-            {
-                printHelp();
-            }
+
         }
         catch(ArrayIndexOutOfBoundsException e)
         {
-            System.out.println("No command line args, showing help command.");
+            System.out.println("Missing command line args, showing help command.");
             printHelp();
         }
+
     }
 
     /**
@@ -78,8 +76,10 @@ public class Main {
      */
     private static void printHelp()
     {
-        System.out.println("Usage: java -jar resonancecascade.jar <seed> <generation setting>");
-        System.out.println("<seed> is a 9 or less digit number greater than 0 and <generation setting> is 0 (for now)");
+        System.out.println("\nUsage: java -jar resonancecascade.jar <seed> <generation setting> <number of dimensions>");
+        System.out.println("<seed> is a 9 or less digit number greater than 0");
+        System.out.println("<generation setting> is 0 (for now)");
+        System.out.println("<number of dimensions> is the number of dimensions to generate, must be greater than 0");
     }
 
 }

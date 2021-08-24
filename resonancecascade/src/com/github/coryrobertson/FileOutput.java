@@ -39,7 +39,6 @@ public class FileOutput
      */
     public static void writeArrayToFile(String filename, String[] data, boolean separate)
     {
-        filename = "./" + filename;
         File file = new File(filename);
         try (FileWriter fw = new FileWriter(file))
         {
@@ -55,7 +54,7 @@ public class FileOutput
                 }
 
             }
-            System.out.println("Wrote data to file successfully.");
+            System.out.println("Wrote data to file successfully. (" + filename + ")");
 
         }
         catch (IOException e)
