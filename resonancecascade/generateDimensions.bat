@@ -1,2 +1,2 @@
-java -jar resonancecascade.jar 0 0 20
+java -jar resonancecascade.jar 159 0 20
 pause
