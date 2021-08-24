@@ -7,7 +7,7 @@ package com.github.coryrobertson;
 
 /**
  * This class is used to take the user input and translate that to getting the program to run in the most full amount possible.
- * There are no nessecery function to call here other than main().
+ * There are no necessary function to call here other than main().
  */
 public class Main {
 
@@ -16,15 +16,33 @@ public class Main {
      * Seed int, for rng generation
      * Generator type int, for deciding preset generation
      * @param args
-     * Expected args are <seed> <generation setting> <how many dimensions>
+     * Expected args are 0<seed> 1<generation setting> 2<how many dimensions> 3<min time stay> 4<max time stay>
      *
      */
     public static void main(String[] args)
     {
+        boolean timeSet;
+        int minTimeStay;
+        int maxTimeStay;
+        try
+        {
+            minTimeStay = Integer.parseInt(args[3]);
+            maxTimeStay = Integer.parseInt(args[4]);
+            timeSet = true;
+            System.out.println("Running with custom time to stay in dimension...");
+        } catch (ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println("Running without custom time to stay in dimension...");
+
+            timeSet = false;
+            minTimeStay = 0;
+            maxTimeStay = 0;
+        }
+
         try
         {
 
-            //examples of help commands are "h", "-h", "help", "-help" but im just gonna use contains "h" cause that will probably work just great lmao
+            //examples of help commands are "h", "-h", "help", "-help" but im just going to use contains "h" because that will probably work just great lmao
             if (args[0].contains("h"))
             {
                 printHelp();
@@ -33,8 +51,8 @@ public class Main {
             {
 
                 int numDims = Integer.parseInt(args[2]); // this is the variable used to store how many dimensions to generate
-                int seed = Integer.parseInt(args[0]); // this is the seed in which we use to generate our dimensions
-                Generator[] dimenions = new Generator[numDims]; // this is an array of dimensions that gets populated after the comming for loop
+                int seed = Integer.parseInt(args[0]); // this is the seed in which we used to generate our dimensions
+                Generator[] dimensions = new Generator[numDims]; // this is an array of dimensions that gets populated after the coming for loop
                 String[] teleportCommands = new String[numDims]; // this is an array of minecraft commands tied to the size of dimensions, we use this to teleport the player around
 
                 int runningCount = 0; // this is a variable used to store how many ticks to add onto each teleport command
@@ -42,8 +60,17 @@ public class Main {
                 for (int i = 0; i < numDims; i++)
                 {
                     //storing the dimensions in an array just in case they are needed
-                    Generator temp = new Generator(seed+i*seed, i + "");
-                    dimenions[i] = temp;
+                    Generator temp;
+                    if (timeSet)
+                        {
+                            temp = new Generator(seed + i * seed, i + "",minTimeStay,maxTimeStay);
+                        }
+                        else
+                        {
+                            temp = new Generator(seed + i * seed, i + "");
+                        }
+
+                    dimensions[i] = temp;
 
                     //write the dimension out to a file where it goes
                     FileOutput.writeFileContents("./data/stuff/dimension_type/" + temp.getDimName() + ".json", temp.getDimensionTypeJSON());
@@ -76,10 +103,13 @@ public class Main {
      */
     private static void printHelp()
     {
-        System.out.println("\nUsage: java -jar resonancecascade.jar <seed> <generation setting> <number of dimensions>");
+        System.out.println("\nUsage: java -jar resonancecascade.jar <seed> <generation setting> <number of dimensions> <min time stay> <max time stay>");
         System.out.println("<seed> is a 9 or less digit number greater than 0");
         System.out.println("<generation setting> is 0 (for now)");
         System.out.println("<number of dimensions> is the number of dimensions to generate, must be greater than 0");
+        System.out.println("OPTIONAL <min time stay> is how long the player must stay at minimum in each dimension (in increments of ~9 seconds)");
+        System.out.println("OPTIONAL <max time stay> is the upper bound of how long the player can be in each dimension (in increments of ~9 seconds)");
+
     }
 
 }

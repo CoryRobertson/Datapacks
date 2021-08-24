@@ -34,7 +34,21 @@ public class Generator
     {
         rand = new Random(genSeed);
         this.dimName = dimName;
-        //infiniburnBlocks[0] = "minecraft:infiniburn_overworld";
+    }
+
+    /**
+     *
+     * @param genSeed the seed used to generate a dimension
+     * @param dimName the name of the dimension (which will be the filename as well)
+     * @param minTimeStay the minimum time to spend in this dimension (in increments of 9 seconds)
+     * @param maxTimeStay the maximum time to spend in this dimension (in increments of 9 seconds)
+     */
+    public Generator(int genSeed, String dimName,int minTimeStay, int maxTimeStay)
+    {
+        this.minTimeStay = minTimeStay;
+        this.maxTimeStay = maxTimeStay;
+        rand = new Random(genSeed);
+        this.dimName = dimName;
     }
 
     /**

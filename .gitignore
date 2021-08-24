@@ -16,6 +16,6 @@ resonancecascade/.idea/artifacts/resonancecascade_jar.xml
 resonancecascade/lib/json-simple-1.1.1.jar
 resonancecascade/.idea/runConfigurations.xml
 *.json
-*.jar
 resonancecascade/.idea/uiDesigner.xml
 resonancecascade/data/stuff/functions/dimtele.mcfunction
+*.jar
