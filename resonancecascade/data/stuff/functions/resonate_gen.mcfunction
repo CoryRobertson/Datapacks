@@ -1,8 +1,5 @@
 ##This file generates the platform that the player starts on in each dimension
 
-
-#possible solution is to execute all these commands at the player e.g. "execute at @a ..." smth like that
-
 #generate platform to stand on
 execute at @a run fill -5 70 -5 5 75 5 minecraft:air
 execute at @a run fill -5 69 -5 5 69 5 minecraft:grass_block replace
@@ -18,4 +15,4 @@ execute at @a run tp @a 0 70 0
 
 
 
-say resonated
+say Resonated

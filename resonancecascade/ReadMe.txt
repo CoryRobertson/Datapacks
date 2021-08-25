@@ -1,0 +1,25 @@
+To generate a resonance cascade datapack open a command prompt in the location of the jar file, and run this command
+java -jar resonancecascade.jar -h
+
+You can alter the generateDimensions.bat file for more easy generation if you prefer not using command prompt. To edit it you can right-click and edit the file.
+
+This command will help you find out what settings you may or may not want. If you prefer reading the help command from this file it is the next couple lines as listed:
+
+Usage: java -jar resonancecascade.jar <seed> <generation setting> <number of dimensions> <min time stay> <max time stay>
+<seed> is a 9 or less digit number greater than 0
+<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether)
+<number of dimensions> is the number of dimensions to generate, must be greater than 0
+OPTIONAL <min time stay> is how long the player must stay at minimum in each dimension (in increments of ~9 seconds)
+OPTIONAL <max time stay> is the upper bound of how long the player can be in each dimension (in increments of ~9 seconds)
+
+Example command:
+
+java -jar resonancecascade.jar 159 0 20
+This command has the seed 159, generator setting of 0, and it will make 20 dimensions
+java -jar resonancecascade.jar 99999 0 80 1 20
+This command has the seed 99999, generator setting of 0, it will make 80 dimensions, and each dimension will remain for between ~1*9 seconds and ~20*9 seconds
+
+If you set the time values to the same number, the time will no longer be randomized.
+
+Feel free to poke around some files in ./data/stuff/functions
+notably, timer.mcfunction, dimtele.mcfunction, resonate.mcfunction, and resonate_gen.mcfunction are all rather easy to change to get the desired functionality you want.

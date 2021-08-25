@@ -3,6 +3,8 @@ import org.json.simple.*;
 
 import java.util.Random;
 
+//TODO: create subclasses of this generator such as no nether, no end,and only overworld
+
 /**
  * This class is meant to be an inherited class. The function of this class is to take an input of seed and output two JSON strings, one being generator type and generator for minecraft.
  */
@@ -16,7 +18,11 @@ public class Generator
     private int maxTimeStay = 34;
     private int timeToStay = 1;
     private int height = 256;
+    private String effect;
+    private String biomeSetting;
+    private String genSetting;
 
+    //modifiable variables used for subclasses
     protected String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
     protected String[] effects = {"minecraft:overworld","minecraft:the_nether","minecraft:the_end"};
     protected String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:vanilla_layered"};
@@ -49,6 +55,7 @@ public class Generator
         this.maxTimeStay = maxTimeStay;
         rand = new Random(genSeed);
         this.dimName = dimName;
+
     }
 
     /**
@@ -66,13 +73,15 @@ public class Generator
         //String setting = getSettings();
         //add settings to the generator object
         String genSettings = getGenSettings();
+        this.genSetting = genSettings;
         gen.put("settings", genSettings);//this is depended on upon by getBiomeSettings();
         gen.put("seed", dimSeed); // sets the seed to the dimension
         gen.put("type", "minecraft:noise");// I don't know of any more interesting noise functions
 
         //add settings to the biome object
         biome.put("seed", dimSeed);
-        biome.put("type", getBiomeSettings(genSettings)); // this needs to be dependent on the genSettings();
+        biomeSetting = getBiomeSettings(genSettings);
+        biome.put("type", biomeSetting); // this needs to be dependent on the genSettings();
 
         // put the biome source object into the generator object
         gen.put("biome_source", biome);
@@ -142,7 +151,8 @@ public class Generator
         dimType.put("has_ceiling", getHasCeiling());
         dimType.put("coordinate_scale", getCoordinateScale());
         dimType.put("ambient_light", getAmbientLight());
-        dimType.put("effects", getEffects());
+        effect = getEffects();
+        dimType.put("effects", effect);
         dimType.put("infiniburn", getInfiniburn());
         dimType.put("min_y", getMinY());
         height = getHeight();
@@ -301,6 +311,19 @@ public class Generator
     public int getTimeStay()
     {
         return timeToStay;
+    }
+
+    @Override
+    public String toString()
+    {
+        String retn = "";
+        retn += "Name: " + dimName + "\n";
+        retn += "Effect: " + effect + "\n";
+        retn += "Biome Setting: " + biomeSetting + "\n";
+        retn += "Gen Setting: " + genSetting + "\n";
+        retn += "Time to Stay: " + timeToStay + "\n";
+
+        return retn;
     }
 
 }
