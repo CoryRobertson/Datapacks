@@ -3,8 +3,6 @@ package com.github.coryrobertson.resonancecascade;
 import org.json.simple.*;
 import java.util.Random;
 
-//TODO: create subclasses of this generator such as no nether, no end,and only overworld
-
 /**
  * This class is meant to be an inherited class. The function of this class is to take an input of seed and output two JSON strings, one being generator type and generator for minecraft.
  */
