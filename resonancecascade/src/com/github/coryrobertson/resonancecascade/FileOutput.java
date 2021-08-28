@@ -1,4 +1,4 @@
-package com.github.coryrobertson;
+package com.github.coryrobertson.resonancecascade;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,6 +1,6 @@
-package com.github.coryrobertson;
-import org.json.simple.*;
+package com.github.coryrobertson.resonancecascade;
 
+import org.json.simple.*;
 import java.util.Random;
 
 //TODO: create subclasses of this generator such as no nether, no end,and only overworld
@@ -23,6 +23,7 @@ public class Generator
     private String genSetting;
 
     //modifiable variables used for subclasses
+    protected String generatorName = "Default";
     protected String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
     protected String[] effects = {"minecraft:overworld","minecraft:the_nether","minecraft:the_end"};
     protected String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:vanilla_layered"};
@@ -318,6 +319,7 @@ public class Generator
     {
         String retn = "";
         retn += "Name: " + dimName + "\n";
+        retn += "Gen Name: " + generatorName + "\n";
         retn += "Effect: " + effect + "\n";
         retn += "Biome Setting: " + biomeSetting + "\n";
         retn += "Gen Setting: " + genSetting + "\n";

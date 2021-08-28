@@ -1,4 +1,4 @@
-package com.github.coryrobertson;
+package com.github.coryrobertson.resonancecascade;
 
 /**
  * This is a subclass of the generator class and has no end biome or terrain.
@@ -11,6 +11,7 @@ public class GeneratorNoEnd extends Generator
         effects = new String[]{"minecraft:overworld", "minecraft:the_nether"};
         biomeSettings = new String[]{"minecraft:vanilla_layered"};
         genSettings = new String[]{"minecraft:overworld", "minecraft:nether", "minecraft:amplified", "minecraft:caves"};
+        generatorName = "No End";
     }
     public GeneratorNoEnd(int genSeed, String dimName)
     {
@@ -18,5 +19,6 @@ public class GeneratorNoEnd extends Generator
         effects = new String[]{"minecraft:overworld", "minecraft:the_nether"};
         biomeSettings = new String[]{"minecraft:vanilla_layered"};
         genSettings = new String[]{"minecraft:overworld", "minecraft:nether", "minecraft:amplified", "minecraft:caves"};
+        generatorName = "No End";
     }
 }
