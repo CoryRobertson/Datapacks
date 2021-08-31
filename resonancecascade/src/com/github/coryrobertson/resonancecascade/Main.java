@@ -18,9 +18,8 @@ public class Main
     static final int notEnoughValid = 2;
     static final int failedArgs = -1;
 
-
     static final String genSettingMessage = "<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether)";
-    static final int[] genSettingsAvailable = {0,1,2}; // this final is used to determine what gen settings are allowed in the system that parses the arguments
+    static final int[] genSettingsAvailable = {0,1,2,3}; // this final is used to determine what gen settings are allowed in the system that parses the arguments
 
     /**
      * The main function has 2 inputs:
@@ -208,6 +207,11 @@ public class Main
                     return new GeneratorNoNether(seed + i * seed, i + "", minTimeStay, maxTimeStay);
                 else
                     return new GeneratorNoNether(seed + i * seed, i + "");
+            case 3:
+                if (timeSet)
+                    return new GeneratorNoEndNoNether(seed + i * seed, i + "", minTimeStay, maxTimeStay);
+                else
+                    return new GeneratorNoEndNoNether(seed + i * seed, i + "");
 
             default:
                 System.out.println("Unexpected value: " + genSetting + " check if generator setting is a valid selection.");
