@@ -9,7 +9,7 @@ This command will help you find out what settings you may or may not want. If yo
 
 Usage: java -jar resonancecascade.jar <seed> <generation setting> <number of dimensions> <min time stay> <max time stay>
 <seed> is a 9 or less digit number greater than 0
-<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether)
+<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether),3 (no nether no end)
 <number of dimensions> is the number of dimensions to generate, must be greater than 0
 OPTIONAL <min time stay> is how long the player must stay at minimum in each dimension (in increments of ~9 seconds)
 OPTIONAL <max time stay> is the upper bound of how long the player can be in each dimension (in increments of ~9 seconds)
