@@ -139,7 +139,7 @@ public class Main
         Generator[] dimensions = new Generator[numDims]; // this is an array of dimensions that gets populated after the coming for loop
         String[] teleportCommands = new String[numDims]; // this is an array of minecraft commands tied to the size of dimensions, we use this to teleport the player around
 
-        long runDuration = System.currentTimeMillis(); 
+        long runDuration = System.currentTimeMillis();
         int runningCount = 0; // this is a variable used to store how many ticks to add onto each teleport command
 
         for (int i = 0; i < numDims; i++) {
