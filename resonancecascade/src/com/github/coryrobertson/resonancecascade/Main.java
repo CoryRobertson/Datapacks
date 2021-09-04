@@ -18,7 +18,8 @@ public class Main
     static final int notEnoughValid = 2;
     static final int failedArgs = -1;
 
-    static final String genSettingMessage = "<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether)";
+    //constants for gen setting message print out and gen settings available
+    static final String genSettingMessage = "<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether),3 (no end or nether)";
     static final int[] genSettingsAvailable = {0,1,2,3}; // this final is used to determine what gen settings are allowed in the system that parses the arguments
 
     /**
@@ -143,13 +144,13 @@ public class Main
         for (int i = 0; i < numDims; i++) {
             //storing the dimensions in an array just in case they are needed
             Generator temp = getGenerator(genSetting, timeSet, seed, i, minTimeStay, maxTimeStay);
-            System.out.println("MIN TIME STAY " + minTimeStay);
-            System.out.println("MAX TIME STAY " + maxTimeStay);
+            //System.out.println("MIN TIME STAY " + minTimeStay);
+            //System.out.println("MAX TIME STAY " + maxTimeStay);
             dimensions[i] = temp;
 
             //write the dimension out to a file where it goes
-            FileOutput.writeFileContents("./data/stuff/dimension_type/" + temp.getDimName() + ".json", temp.getDimensionTypeJSON());
-            FileOutput.writeFileContents("./data/stuff/dimension/" + temp.getDimName() + ".json", temp.getDimensionJSON());
+            FileOutput.writeFileContents("./data/stuff/dimension_type/",temp.getDimName() + ".json", temp.getDimensionTypeJSON());
+            FileOutput.writeFileContents("./data/stuff/dimension/",temp.getDimName() + ".json", temp.getDimensionJSON());
 
             //increment the time to stay running count
             runningCount += temp.getTimeStay();
@@ -157,20 +158,16 @@ public class Main
             //add the current dimensions teleport command to the array to be written to a file
             teleportCommands[i] = "execute as @a[scores={dimensionCount=" + i + ",timerEnd=" + runningCount + "..}] in stuff:" + i + " run function stuff:resonate";
 
-
         }
         //write the array out to a file
         FileOutput.writeArrayToFile("./data/stuff/functions/dimtele.mcfunction", teleportCommands, true);
 
         for (Generator dim : dimensions) {
-            System.out.println(dim);
+            //System.out.println(dim);
         }
 
-        System.out.println("\n\nRun time: " + (System.currentTimeMillis() - runDuration) + "ms to run");
+        System.out.println("\n======================\nRun time: " + (System.currentTimeMillis() - runDuration) + "ms to run\n======================");
     }
-
-
-
 
     /**
      * Prints the help screen to console
