@@ -12,4 +12,4 @@ execute as @a[scores={hh_deaths=10..}] at @s run attribute @s minecraft:generic.
 
 execute as @a[scores={hh_deaths=1..}] at @s run scoreboard players add @s hh_ticks 1
 
-execute as @a[level=20..,scores={hh_ticks=24000..}] at @s run function stuff:revive
+execute as @a[level=20..,scores={hh_ticks=24000..}] at @s run function hardcorehearts:revive
