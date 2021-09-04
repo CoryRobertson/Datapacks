@@ -36,6 +36,7 @@ public class Main
      */
     public static void main(String[] args)
     {
+        long runDuration = System.currentTimeMillis();
         //Scanner in = new Scanner(System.in);
         boolean timeSet; // this is a working variable used to determine if the user has or has not set a specific time to stay in dimensions.
 
@@ -165,6 +166,7 @@ public class Main
             System.out.println(dim);
         }
 
+        System.out.println("\n\nRun time: " + (System.currentTimeMillis() - runDuration) + "ms to run");
     }
 
 
