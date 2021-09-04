@@ -1,5 +1,5 @@
 ##This file prepares the player and teleports the player to the next dimension
-scoreboard players add @a dimensionCount 1
+scoreboard players add @s dimensionCount 1
 tp @s 0 70 0
 
 #give the player effects incase they spawn in lava, or take fall damage, we also heal them just incase :)
