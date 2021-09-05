@@ -9,7 +9,7 @@ public class GeneratorNoEnd extends Generator
     {
         super(genSeed, dimName, minTimeStay, maxTimeStay);
         effects = new String[]{"minecraft:overworld", "minecraft:the_nether"};
-        biomeSettings = new String[]{"minecraft:vanilla_layered"};
+        biomeSettings = new String[]{"minecraft:vanilla_layered", "minecraft:checkerboard", "minecraft:fixed"};
         genSettings = new String[]{"minecraft:overworld", "minecraft:nether", "minecraft:amplified", "minecraft:caves"};
         generatorName = "No End";
     }
@@ -17,7 +17,7 @@ public class GeneratorNoEnd extends Generator
     {
         super(genSeed, dimName);
         effects = new String[]{"minecraft:overworld", "minecraft:the_nether"};
-        biomeSettings = new String[]{"minecraft:vanilla_layered"};
+        biomeSettings = new String[]{"minecraft:vanilla_layered", "minecraft:checkerboard", "minecraft:fixed"};
         genSettings = new String[]{"minecraft:overworld", "minecraft:nether", "minecraft:amplified", "minecraft:caves"};
         generatorName = "No End";
     }

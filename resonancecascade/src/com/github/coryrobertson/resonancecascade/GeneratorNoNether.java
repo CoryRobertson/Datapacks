@@ -9,7 +9,7 @@ public class GeneratorNoNether extends Generator
     {
         super(genSeed, dimName);
         effects = new String[]{"minecraft:overworld", "minecraft:the_end"};
-        biomeSettings = new String[]{"minecraft:the_end", "minecraft:vanilla_layered", "minecraft:vanilla_layered"};
+        biomeSettings = new String[]{"minecraft:the_end", "minecraft:vanilla_layered", "minecraft:checkerboard","minecraft:fixed"};
         genSettings = new String[]{"minecraft:overworld", "minecraft:amplified", "minecraft:caves"};
         generatorName = "No Nether";
     }
@@ -18,7 +18,7 @@ public class GeneratorNoNether extends Generator
     {
         super(genSeed, dimName, minTimeStay, maxTimeStay);
         effects = new String[]{"minecraft:overworld", "minecraft:the_end"};
-        biomeSettings = new String[]{"minecraft:the_end", "minecraft:vanilla_layered", "minecraft:vanilla_layered"};
+        biomeSettings = new String[]{"minecraft:the_end", "minecraft:vanilla_layered", "minecraft:checkerboard","minecraft:fixed"};
         genSettings = new String[]{"minecraft:overworld", "minecraft:amplified", "minecraft:caves"};
         generatorName = "No Nether";
     }

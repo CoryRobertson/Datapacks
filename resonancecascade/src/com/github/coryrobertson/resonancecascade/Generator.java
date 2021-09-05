@@ -24,8 +24,9 @@ public class Generator
     protected String generatorName = "Default";
     protected String[] infiniburnBlocks = {"minecraft:infiniburn_overworld"};
     protected String[] effects = {"minecraft:overworld","minecraft:the_nether","minecraft:the_end"};
-    protected String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:vanilla_layered"};
+    protected String[] biomeSettings = {"minecraft:the_end","minecraft:vanilla_layered","minecraft:checkerboard","minecraft:fixed"};
     protected String[] genSettings = {"minecraft:overworld","minecraft:nether","minecraft:amplified","minecraft:caves"}; // turns out minecraft:the_end is just too difficult to get working here
+    protected String[] allBiomes = {"minecraft:cold_ocean", "minecraft:deep_lukewarm_ocean", "minecraft:deep_ocean", "minecraft:birch_forest_hills", "minecraft:desert_hills", "minecraft:desert_lakes", "minecraft:end_barrens", "minecraft:desert", "minecraft:end_midlands", "minecraft:eroded_badlands", "minecraft:flower_forest", "minecraft:badlands", "minecraft:bamboo_jungle", "minecraft:badlands_plateau", "minecraft:deep_warm_ocean", "minecraft:end_highlands", "minecraft:forest", "minecraft:frozen_ocean", "minecraft:frozen_river", "minecraft:giant_spruce_taiga", "minecraft:giant_spruce_taiga_hills", "minecraft:giant_tree_taiga", "minecraft:giant_tree_taiga_hills", "minecraft:gravelly_mountains", "minecraft:ice_spikes", "minecraft:jungle", "minecraft:jungle_edge", "minecraft:jungle_hills", "minecraft:lukewarm_ocean", "minecraft:modified_badlands_plateau", "minecraft:modified_gravelly_mountains", "minecraft:modified_jungle", "minecraft:modified_jungle_edge", "minecraft:modified_wooded_badlands_plateau", "minecraft:mountain_edge", "minecraft:mountains", "minecraft:mushroom_field_shore", "minecraft:mushroom_fields", "minecraft:nether_wastes", "minecraft:ocean", "minecraft:plains", "minecraft:river", "minecraft:savanna", "minecraft:savanna_plateau", "minecraft:shattered_savanna", "minecraft:shattered_savanna_plateau", "minecraft:small_end_islands", "minecraft:snowy_beach", "minecraft:snowy_mountains", "minecraft:snowy_taiga", "minecraft:snowy_taiga_hills", "minecraft:snowy_taiga_mountains", "minecraft:snowy_tundra", "minecraft:soul_sand_valley", "minecraft:stone_shore", "minecraft:sunflower_plains", "minecraft:swamp", "minecraft:swamp_hills", "minecraft:taiga", "minecraft:taiga_hills", "minecraft:taiga_mountains", "minecraft:tall_birch_forest", "minecraft:tall_birch_hills", "minecraft:the_end", "minecraft:the_void", "minecraft:warm_ocean", "minecraft:warped_forest", "minecraft:wooded_badlands_plateau", "minecraft:wooded_hills", "minecraft:wooded_mountains", "minecraft:deep_cold_ocean", "minecraft:dark_forest_hills", "minecraft:dark_forest", "minecraft:bamboo_jungle_hills", "minecraft:basalt_deltas", "minecraft:beach", "minecraft:birch_forest", "minecraft:crimson_forest", "minecraft:deep_frozen_ocean"};
     //TODO: further understand how minecraft:the_end causes issues when used as a generator setting
 
     private Random rand;
@@ -80,7 +81,27 @@ public class Generator
         //add settings to the biome object
         biome.put("seed", dimSeed);
         biomeSetting = getBiomeSettings(genSettings);
+        //biomeSetting = "minecraft:checkerboard";
         biome.put("type", biomeSetting); // this needs to be dependent on the genSettings();
+
+
+        if(biomeSetting.equals("minecraft:checkerboard"))// if the biome setting is checkerboard
+        {
+            JSONArray biomeList = new JSONArray();// create a json array
+            int biomeCount = rand.nextInt(allBiomes.length - 1) + 1; // decide how many biomes will be put into this array
+            //System.out.println("checkerboard");
+            for(int i = 0; i < biomeCount; i++)
+            {
+                //populate this array
+                biomeList.add(chooseRandomString(allBiomes));
+            }
+            biome.put("biomes",biomeList);// put the array into the json file
+        }
+        else if(biomeSetting.equals("minecraft:fixed"))// if the biome setting is fixed
+        {
+            //System.out.println("fixed");
+            biome.put("biome",chooseRandomString(allBiomes));// pick a random biome and place it into the json file
+        }
 
         // put the biome source object into the generator object
         gen.put("biome_source", biome);
@@ -122,15 +143,9 @@ public class Generator
      */
     private String getBiomeSettings(String genSettings)
     {
-        //TODO: clean this up
-        if (genSettings.equals("minecraft:the_end")) // really hacky solution?? all hope is not lost yet!
-            return "minecraft:fixed";
-        else
-        {
             String retn = chooseRandomString(biomeSettings);
 
             return retn;
-        }
     }
 
     /**
