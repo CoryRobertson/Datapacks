@@ -16,6 +16,7 @@
   - The player is teleported through each dimension till there are no more, stopping on the last one.
   - The platform the player is teleported onto is copied between each dimension.
   - The time the player takes to teleport between each dimension is randomized between a lower bound and upper bound.
+  - Examples of various dimensions: https://imgur.com/a/2eP0yVR
   
 #### Suggestions
 I am completely open to suggestions as making datapacks is quite fun, feel free to ask. I'm pretty new though so I might not do everything great or even proper.
