@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    //implementation files("./data/")
+}
+
+application {
+    mainClass = 'com.github.coryrobertson.resonancecascade.Main'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+clean.doFirst
+        {
+            delete "./data/stuff/dimension"
+            delete "./data/stuff/dimension_type"
+            delete "./data/stuff/functions/dimtele.mcfunction"
+            println "Cleaning ./data/stuff/dimension"
+            println "Cleaning ./data/stuff/dimension_type"
+            println "Cleaning ./data/stuff/functions/dimtele.mcfunction"
+        }

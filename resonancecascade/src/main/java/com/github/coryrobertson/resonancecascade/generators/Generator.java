@@ -9,9 +9,9 @@ import java.util.Random;
 public class Generator
 {
     //default instance variables to generate the data
-    private int minecraftSeedMin = 0;
-    private int minecraftSeedMax = 999999999;
-    private String dimName;
+    private final int minecraftSeedMin = 0;
+    private final int minecraftSeedMax = 999999999;
+    private final String dimName;
     private int minTimeStay = 1;
     private int maxTimeStay = 34;
     private int timeToStay = 1;
