@@ -1,4 +1,4 @@
-package com.github.coryrobertson.resonancecascade;
+package com.github.coryrobertson.resonancecascade.generators;
 
 /**
  * This is a subclass of the generator class and has no nether biome or terrain
@@ -10,7 +10,7 @@ public class GeneratorNoNether extends Generator
         super(genSeed, dimName);
         effects = new String[]{"minecraft:overworld", "minecraft:the_end"};
         biomeSettings = new String[]{"minecraft:the_end", "minecraft:vanilla_layered", "minecraft:checkerboard","minecraft:fixed"};
-        genSettings = new String[]{"minecraft:overworld", "minecraft:amplified", "minecraft:caves"};
+        genSettings = new String[]{"minecraft:overworld", "minecraft:amplified", "minecraft:caves","minecraft:floating_islands"};
         generatorName = "No Nether";
     }
 
@@ -19,7 +19,7 @@ public class GeneratorNoNether extends Generator
         super(genSeed, dimName, minTimeStay, maxTimeStay);
         effects = new String[]{"minecraft:overworld", "minecraft:the_end"};
         biomeSettings = new String[]{"minecraft:the_end", "minecraft:vanilla_layered", "minecraft:checkerboard","minecraft:fixed"};
-        genSettings = new String[]{"minecraft:overworld", "minecraft:amplified", "minecraft:caves"};
+        genSettings = new String[]{"minecraft:overworld", "minecraft:amplified", "minecraft:caves","minecraft:floating_islands"};
         generatorName = "No Nether";
     }
 

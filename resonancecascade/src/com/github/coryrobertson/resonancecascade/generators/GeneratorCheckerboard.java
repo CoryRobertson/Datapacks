@@ -1,4 +1,4 @@
-package com.github.coryrobertson.resonancecascade;
+package com.github.coryrobertson.resonancecascade.generators;
 
 public class GeneratorCheckerboard extends Generator {
     public GeneratorCheckerboard(int genSeed, String dimName)

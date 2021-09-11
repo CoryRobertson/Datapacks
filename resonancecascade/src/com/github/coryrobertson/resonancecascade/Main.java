@@ -1,10 +1,9 @@
 package com.github.coryrobertson.resonancecascade;
 
+import com.github.coryrobertson.resonancecascade.generators.*;
+
 import java.util.Random;
 import java.util.Scanner;
-//import java.io.File;
-//import java.util.Random;
-//import org.json.simple.parser.JSONParser;
 
 /**
  * This class is used to take the user input and translate that to getting the program to run in the most full amount possible.
@@ -19,8 +18,8 @@ public class Main
     static final int failedArgs = -1;
 
     //constants for gen setting message print out and gen settings available
-    static final String genSettingMessage = "<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether),3 (no end or nether),4 (checkerboard only)";
-    static final int[] genSettingsAvailable = {0,1,2,3,4}; // this final is used to determine what gen settings are allowed in the system that parses the arguments
+    static final String genSettingMessage = "<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether),3 (no end or nether),4 (checkerboard only),5 (floating islands only)";
+    static final int[] genSettingsAvailable = {0,1,2,3,4,5}; // this final is used to determine what gen settings are allowed in the system that parses the arguments
 
     /**
      * The main function has 2 inputs:
@@ -217,6 +216,11 @@ public class Main
                     return new GeneratorCheckerboard(seed + i * seed, i + "", minTimeStay, maxTimeStay);
                 else
                     return new GeneratorCheckerboard(seed + i * seed, i + "");
+            case 5:
+                if(timeSet)
+                    return new GeneratorFloatingIslands(seed + i * seed, i + "", minTimeStay, maxTimeStay);
+                else
+                    return new GeneratorFloatingIslands(seed + i * seed, i + "");
 
             default:
                 System.out.println("Unexpected value: " + genSetting + " check if generator setting is a valid selection.");
