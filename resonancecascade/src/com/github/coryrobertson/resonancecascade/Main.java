@@ -2,6 +2,7 @@ package com.github.coryrobertson.resonancecascade;
 
 import com.github.coryrobertson.resonancecascade.generators.*;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,9 +18,11 @@ public class Main
     static final int notEnoughValid = 2;
     static final int failedArgs = -1;
 
+    static Random rand;
+
     //constants for gen setting message print out and gen settings available
-    static final String genSettingMessage = "<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether),3 (no end or nether),4 (checkerboard only),5 (floating islands only)";
-    static final int[] genSettingsAvailable = {0,1,2,3,4,5}; // this final is used to determine what gen settings are allowed in the system that parses the arguments
+    static final String genSettingMessage = "<generation setting> 0 (all biomes and generators),1 (no end),2 (no nether),3 (no end or nether),4 (checkerboard only),5 (floating islands only),-1 (choose randomly for me!)";
+    static final int[] genSettingsAvailable = {-1,0,1,2,3,4,5}; // this final is used to determine what gen settings are allowed in the system that parses the arguments
 
     /**
      * The main function has 2 inputs:
@@ -46,12 +49,10 @@ public class Main
         int genSetting; // this is the setting to be applied to the generator
         int numDims; // this is the variable used to store how many dimensions to generate
 
-        Random rand = new Random(System.currentTimeMillis());
 
-        //TODO: https://stackoverflow.com/questions/2011664/compiling-a-java-program-into-an-executable
         //Expected args are 0<seed> 1<generation setting> 2<how many dimensions> 3<min time stay> 4<max time stay>
         int checkArgs = checkArgs(args);
-        switch(checkArgs)//switch on the state of the arguments as they are parsed.
+        switch(checkArgs) //switch on the state of the arguments as they are parsed.
         {
             case allValid://this case is used when there are 5 valid arguments
                     System.out.println("Running with custom time to stay in dimension...");
@@ -61,6 +62,7 @@ public class Main
                     minTimeStay = Integer.parseInt(args[3]);
                     maxTimeStay = Integer.parseInt(args[4]);
                     timeSet = true;
+                    rand = new Random(seed);
                 break;
 
             case enoughValid://this case is used when there are 3 valid arguments and no extra ones
@@ -69,12 +71,14 @@ public class Main
                     genSetting = Integer.parseInt(args[1]);
                     numDims = Integer.parseInt(args[2]);
                     timeSet = false;
+                    rand = new Random(seed);
                 break;
 
             case notEnoughValid://this case is used when there is something wrong with the arguments
             case failedArgs://this case is used when there are extra(>5), or somehow a negative amount of arguments listed?
             default:
                 //right here we will initialize all needed variables by asking the user for them
+                rand = new Random(System.currentTimeMillis());
                 Scanner in = new Scanner(System.in);
                 System.out.println("Not enough command line arguments given, will now initialize them via prompts...\n");
 
@@ -129,11 +133,9 @@ public class Main
                     timeSet = true;
                 }
 
-
                 break;
 
         }
-
 
         Generator[] dimensions = new Generator[numDims]; // this is an array of dimensions that gets populated after the coming for loop
         String[] teleportCommands = new String[numDims]; // this is an array of minecraft commands tied to the size of dimensions, we use this to teleport the player around
@@ -149,8 +151,15 @@ public class Main
             dimensions[i] = temp;
 
             //write the dimension out to a file where it goes
-            FileOutput.writeFileContents("./data/stuff/dimension_type/",temp.getDimName() + ".json", temp.getDimensionTypeJSON());
-            FileOutput.writeFileContents("./data/stuff/dimension/",temp.getDimName() + ".json", temp.getDimensionJSON());
+            try
+            {
+                FileOutput.writeFileContents("./data/stuff/dimension_type/", temp.getDimName() + ".json", temp.getDimensionTypeJSON());
+                FileOutput.writeFileContents("./data/stuff/dimension/", temp.getDimName() + ".json", temp.getDimensionJSON());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException(e.getMessage());
+            }
 
             //increment the time to stay running count
             runningCount += temp.getTimeStay();
@@ -160,13 +169,20 @@ public class Main
 
         }
         //write the array out to a file
-        FileOutput.writeArrayToFile("./data/stuff/functions/dimtele.mcfunction", teleportCommands, true);
-
-        for (Generator dim : dimensions) {
-            //System.out.println(dim);
+        try
+        {
+            FileOutput.writeArrayToFile("./data/stuff/functions/dimtele.mcfunction", teleportCommands, true);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e.getMessage());
         }
 
-        System.out.println("\n======================\nRun time: " + (System.currentTimeMillis() - runDuration) + "ms to run\n======================");
+//        for (Generator dim : dimensions) {
+//            System.out.println(dim);
+//        }
+
+        System.out.println("\n======================\nRun time: " + (System.currentTimeMillis() - runDuration) + "ms to run\n======================\n");
     }
 
     /**
@@ -191,6 +207,9 @@ public class Main
         //CLEANUP: there has to be a better way to do this
         switch (genSetting)
         {
+            case -1: // spooky random generator chosen for the player on a per dimension basis.
+                int randSettingGen = rand.nextInt(genSettingsAvailable.length - 1);
+                return getGenerator(randSettingGen,timeSet,seed,i,minTimeStay,maxTimeStay);
             case 0:
                 if (timeSet)
                     return new Generator(seed + i * seed, i + "", minTimeStay, maxTimeStay);
@@ -223,11 +242,12 @@ public class Main
                     return new GeneratorFloatingIslands(seed + i * seed, i + "");
 
             default:
-                System.out.println("Unexpected value: " + genSetting + " check if generator setting is a valid selection.");
+                //System.out.println("Unexpected value: " + genSetting + " check if generator setting is a valid selection.");
                 printHelp();
-                System.exit(1);
+                throw new RuntimeException("Error in getGenerator(), Unexpected value: " + genSetting + " check if generator setting is a valid selection.");
+                //System.exit(1);
         }
-        return null;
+        //return null;
     }
 
     /**

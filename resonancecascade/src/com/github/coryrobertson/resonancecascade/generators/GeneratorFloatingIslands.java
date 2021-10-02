@@ -9,14 +9,14 @@ public class GeneratorFloatingIslands extends Generator
     {
         super(genSeed, dimName);
         genSettings = new String[]{"minecraft:floating_islands"};
-        generatorName = "Floating islands";
+        generatorName = "Floating Islands";
     }
 
     public GeneratorFloatingIslands(int genSeed, String dimName, int minTimeStay, int maxTimeStay)
     {
         super(genSeed, dimName, minTimeStay, maxTimeStay);
         genSettings = new String[]{"minecraft:floating_islands"};
-        generatorName = "Floating islands";
+        generatorName = "Floating Islands";
     }
 
 
