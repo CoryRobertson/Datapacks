@@ -1,7 +1,6 @@
 package com.github.coryrobertson.resonancecascade;
 
-import org.junit.jupiter.api.Assertions;
-
+import org.junit.jupiter.api.*;
 import java.util.Random;
 
 class MainTest
@@ -11,7 +10,7 @@ class MainTest
     final int genSettingsAvailable = Main.genSettingsAvailable.length;
 
 
-    @org.junit.jupiter.api.Test
+    @Test
     /**
      *  0 seed is a number between 1 and 999999999
      *  1 generation setting is a number between -1,0,1,2,3,4,5
@@ -35,7 +34,7 @@ class MainTest
 
 
 
-    @org.junit.jupiter.api.Test
+    @Test
     /**
      *  0 seed is a number between 1 and 999999999
      *  1 generation setting is a number between -1,0,1,2,3,4,5
@@ -63,10 +62,18 @@ class MainTest
         Assertions.assertEquals(genSettingsAvailable,checkedCorrectGen);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
+    /**
+     *  0 seed is a number between 1 and 999999999
+     *  1 generation setting is a number between -1,0,1,2,3,4,5
+     *  2 how many dimensions is a number greater than 1 and capped at (5000)? tentative?
+     *  3 min time stay is optional and is at least greater than or equal to 1
+     *  4 max time stay is  optional and is at least greater than or equal to 1
+     */
     void mainManualArgs()
     {
         String[] args = {159 + "",0 + "",dimensionCountTest + "",1 + "",3 + ""};
         Main.main(args);
     }
+
 }
