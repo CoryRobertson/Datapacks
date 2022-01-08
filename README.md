@@ -1,5 +1,5 @@
 # Datapacks
- A repo of datapacks for Minecraft 1.17.1 intended to add things I find interesting to minecraft.
+ A repo of datapacks for Minecraft 1.18.1 intended to add things I find interesting to minecraft.
 
 ### Datapacks in this repository:
 - Hardcore Hearts
